@@ -12,7 +12,7 @@ const url = 'mongodb://localhost:27017/test';
 
 async function connectToDatabase() {
     try{
-        await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(url)
         console.log('Connected to MongoDB with Mongoose');
     }catch(err){
         console.error(err); 
@@ -23,15 +23,23 @@ connectToDatabase();
 const personSchema = new mongoose.Schema({
     name: String,
     age: Number,
-    
+   
 });
 
 const Person = mongoose.model('Person', personSchema);
 
 
-app.engine('hbs', engine({ extname: '.hbs', defaultLayout: 'main', layoutsDir: './views/layouts' }));
+app.engine('hbs', engine({
+    extname: '.hbs',
+    defaultLayout: 'main',
+    layoutsDir: './views/layouts',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
+    }
+}));
 app.set('view engine', 'hbs');
-app.set('views', './views'); 
+app.set('views', './views');
 
 // app.get('/', async (req, res) => {
 //     let client;
