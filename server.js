@@ -8,10 +8,10 @@ const MongoClient = mongodb.MongoClient;
 const url = 'mongodb://localhost:27017'; // MongoDB server URL
 const dbName = 'test'; // Your database name
 
-// Set up Handlebars as the template engine
+
 app.engine('hbs', engine({ extname: '.hbs', defaultLayout: 'main', layoutsDir: './views/layouts' }));
 app.set('view engine', 'hbs');
-app.set('views', './views'); // Set the views directory
+app.set('views', './views'); 
 
 app.get('/', async (req, res) => {
     let client;
